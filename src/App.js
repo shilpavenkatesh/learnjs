@@ -21,12 +21,17 @@ function SynomousFetching() {
             );
             setPost([]);
             setSource("");
-          } else {
+          } else if (data.length !== 0) {
             setPost(data.map((item) => item.word));
 
             setSource("From Datamuse API");
             setError("");
             isDictRespone = true;
+          } else {
+            setPost([]);
+            setError(
+              "Sorry, we couldn't find synonyms for the word you were looking for."
+            );
           }
           console.log(data);
         }
@@ -48,11 +53,16 @@ function SynomousFetching() {
             );
             setPost([]);
             setSource("");
-          } else {
+          } else if (data[0].meanings[0].definitions[0].synonyms) {
             setPost(data[0].meanings[0].definitions[0].synonyms);
             setSource("From Dictionary API");
             setError("");
             isDictRespone = true;
+          } else {
+            setPost([]);
+            setError(
+              "Sorry, we couldn't find synonyms for the word you were looking for."
+            );
           }
         }
       });
