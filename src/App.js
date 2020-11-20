@@ -87,13 +87,11 @@ function SynomousFetching() {
           width="40px"
           height="40px"
         />
+        <h2>The Free Synonyms Dictionary</h2>
       </div>
       <div className="error">{error}</div>
 
       <div className="fetchwrap">
-        <div>
-          <h2>The Free Synonyms Dictionary</h2>
-        </div>
         <div className="findwrap">
           <input
             className="findinput"
