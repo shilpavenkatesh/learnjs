@@ -140,7 +140,7 @@ function SynomousFetching() {
           <div className="source">{source}</div>
           <div className="post" style={{ margin: "10px" }}>
             {post.map((data) => {
-              return <span>{data}</span>;
+              return <span onClick={() => setinputText(data)}>{data}</span>;
             })}
           </div>
         </div>
