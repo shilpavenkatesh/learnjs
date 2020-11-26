@@ -10,8 +10,8 @@ function SynomousFetching() {
 
   let isDictRespone = false;
 
-  const getDataMuseAPI = () => {
-    fetch(`https://api.datamuse.com/words?rel_syn=${inputText}`)
+  const getDataMuseAPI = (searchString) => {
+    fetch(`https://api.datamuse.com/words?rel_syn=${searchString}`)
       .then((res) => res.json())
       .then((data) => {
         if (!isDictRespone) {
@@ -26,6 +26,7 @@ function SynomousFetching() {
 
             setSource("From Datamuse API");
             setError("");
+
             isDictRespone = true;
           } else {
             setPost([]);
@@ -33,6 +34,7 @@ function SynomousFetching() {
               "Sorry, we couldn't find synonyms for the word you were looking for."
             );
           }
+
           console.log(data);
         }
       })
@@ -42,8 +44,8 @@ function SynomousFetching() {
       });
   };
 
-  const getDictionaryAPI = () => {
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${inputText}`)
+  const getDictionaryAPI = (searchString) => {
+    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${searchString}`)
       .then((res) => res.json())
       .then((data) => {
         if (!isDictRespone) {
@@ -57,6 +59,7 @@ function SynomousFetching() {
             setPost(data[0].meanings[0].definitions[0].synonyms);
             setSource("From Dictionary API");
             setError("");
+
             isDictRespone = true;
           } else {
             setPost([]);
@@ -68,7 +71,7 @@ function SynomousFetching() {
       });
   };
 
-  const handleClick = () => {
+  const handleClick = (searchString) => {
     if (!inputText) {
       setError("Please Enter a Word!!");
       setPost([]);
@@ -80,11 +83,12 @@ function SynomousFetching() {
       setSource("");
       return;
     }
+
     if (datamusecheck) {
-      getDataMuseAPI();
+      getDataMuseAPI(searchString);
     }
     if (dictionaryapicheck) {
-      getDictionaryAPI();
+      getDictionaryAPI(searchString);
     }
   };
 
@@ -106,11 +110,20 @@ function SynomousFetching() {
           <input
             className="findinput"
             type="text"
-            value={inputText.trim()}
+            value={inputText}
+            onChange={(e) => {
+              const value = e.target.value;
+              setinputText(value);
+            }}
             placeholder="Enter a word to search..."
-            onChange={(e) => setinputText(e.target.value)}
           />
-          <button className="findbutton" type="button" onClick={handleClick}>
+          <button
+            className="findbutton"
+            type="button"
+            onClick={() => {
+              handleClick(inputText);
+            }}
+          >
             Fetch synonyms
           </button>
         </div>
@@ -138,9 +151,20 @@ function SynomousFetching() {
         <div className="resultwrap">
           <p>Display Result</p>
           <div className="source">{source}</div>
+
           <div className="post" style={{ margin: "10px" }}>
             {post.map((data) => {
-              return <span onClick={() => setinputText(data)}>{data}</span>;
+              return (
+                <span
+                  type="button"
+                  onClick={() => {
+                    setinputText(data);
+                    handleClick(data);
+                  }}
+                >
+                  {data}
+                </span>
+              );
             })}
           </div>
         </div>
