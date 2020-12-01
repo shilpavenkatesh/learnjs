@@ -265,3 +265,29 @@ p {
   font-size: 20px;
   font-weight: 700;
 }
+
+@media only screen and (max-width: 768px) {
+  .resultwrap {
+    width: initial;
+  }
+  .fetchwrap {
+    width: 100%;
+  }
+  img {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  .findwrap {
+    width: 90%;
+    display: flex;
+  }
+  .findbutton {
+    width: 52%;
+  }
+  .findinput {
+    width: 60%;
+  }
+  .error {
+    height: 50px;
+  }
+}
