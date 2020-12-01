@@ -290,4 +290,7 @@ p {
   .error {
     height: 50px;
   }
+  .bodywrap {
+    height: inherit;
+  }
 }
