@@ -101,7 +101,7 @@ function SynomousFetching() {
           width="40px"
           height="40px"
         />
-        <h2>The Free Synonyms Dictionary</h2>
+        <h2>Synonyms Dictionary</h2>
       </div>
       <div className="error">{error}</div>
 
@@ -129,7 +129,7 @@ function SynomousFetching() {
         </div>
         <div className="inputwrap">
           <label>
-            Dictionar API:{" "}
+            Dictionary API:{" "}
             <input
               type="checkbox"
               checked={dictionaryapicheck}
